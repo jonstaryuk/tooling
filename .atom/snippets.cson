@@ -8,8 +8,6 @@
 
         /**
          * ${1:Thing}Tests
-         *
-         * @author Jon Staryuk
          */
         public class ${1:Thing}Tests {
 
