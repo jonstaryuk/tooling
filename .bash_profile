@@ -2,6 +2,7 @@
 
 export CLICOLOR=1
 export LSCOLORS=GxFxCxDxBxegedabagaced
+alias tree="tree -C"
 
 ### Aliases ####################################################################
 
@@ -11,7 +12,6 @@ alias gs='git status'
 alias ga='git add'
 alias hlog='heroku logs -a'
 alias ll='ls -lah' # Long listing
-alias man='man -P most' # Use most as viewer for manpages
 alias random='openssl rand -base64'
 alias rand='random'
 
@@ -22,6 +22,18 @@ alias private='unset HISTFILE && echo -e "\033[1m[\033[0m\033[4m*\033[0m\033[1m]
 
 # Sensitive environment variables
 source '/Users/jonathan/.env_secrets'
+
+# Colorful manpages
+man() {
+    env LESS_TERMCAP_mb=$'\E[01;31m' \
+    LESS_TERMCAP_md=$'\E[01;38;5;74m' \
+    LESS_TERMCAP_me=$'\E[0m' \
+    LESS_TERMCAP_se=$'\E[0m' \
+    LESS_TERMCAP_so=$'\E[38;5;246m' \
+    LESS_TERMCAP_ue=$'\E[0m' \
+    LESS_TERMCAP_us=$'\E[04;38;5;146m' \
+    man "$@"
+}
 
 # rbenv shims
 eval "$(rbenv init -)"
