@@ -83,4 +83,4 @@ export PS1="\u@\h \w\[$txtwht\]\$git_branch\[$bldylw\]\$git_dirty\[$txtrst\] \$ 
 
 # Default Git enabled root prompt (for use with "sudo -s")
 bakred="$(tput setab 1 2>/dev/null || echo '\e[41m')"  # Red
-export SUDO_PS1="\[$bakred\]\u@\h\[$txtrst\] \w\$ "
+export SUDO_PS1="\[$bakred\]\u@\h\[$txtrst\] \w \$ "
