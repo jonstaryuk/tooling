@@ -37,6 +37,10 @@ man() {
     man "$@"
 }
 
+# nvm
+export NVM_DIR="$HOME/.nvm"
+. "$(brew --prefix nvm)/nvm.sh"
+
 # rbenv shims
 eval "$(rbenv init -)"
 
