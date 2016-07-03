@@ -82,11 +82,11 @@ find_git_dirty() {
 PROMPT_COMMAND="find_git_branch; find_git_dirty; $PROMPT_COMMAND"
 
 # Default Git enabled prompt with dirty state
-txtwht="$(tput setaf 7 2>/dev/null || echo '\e[0;37m')"  # White
 txtblu="$(tput setaf 4 2>/dev/null || echo '\e[0;34m')"  # Blue
-bldylw="$(tput setaf 3 2>/dev/null)$(tput bold 2>/dev/null || echo '\e[1;33m')"  # Yellow
+txtpur="$(tput setaf 5 2>/dev/null || echo '\e[0;35m')"  # Purple
+txtylw="$(tput setaf 3 2>/dev/null || echo '\e[0;33m')"  # Yellow
 txtrst="$(tput sgr 0 2>/dev/null || echo '\e[0m')"  # Text Reset
-export PS1="\u@\h \[$txtblu\]\w\[$txtwht\]\$git_branch\[$bldylw\]\$git_dirty\[$txtrst\] \$ "
+export PS1="\[$txtblu\]\u@\h \w\[$txtpur\]\$git_branch\[$txtylw\]\$git_dirty\[$txtblu\] \$ \[$txtrst\]"
 
 # Default Git enabled root prompt (for use with "sudo -s")
 bakred="$(tput setab 1 2>/dev/null || echo '\e[41m')"  # Red
