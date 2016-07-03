@@ -25,6 +25,9 @@ alias private='unset HISTFILE && echo -e "\033[1m[\033[0m\033[4m*\033[0m\033[1m]
 # Sensitive environment variables
 source '/Users/jonathan/.env_secrets'
 
+# Settings not publicly posted
+source '/Users/jonathan/.bash_profile_secret'
+
 # Colorful manpages
 man() {
     env LESS_TERMCAP_mb=$'\E[01;31m' \
