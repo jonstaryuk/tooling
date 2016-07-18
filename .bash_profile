@@ -4,6 +4,18 @@ export CLICOLOR=1
 export LSCOLORS=GxFxCxDxBxegedabagaced
 alias trec="tree -C"
 
+# Manpages
+man() {
+    env LESS_TERMCAP_mb=$'\E[01;31m' \
+    LESS_TERMCAP_md=$'\E[01;38;5;74m' \
+    LESS_TERMCAP_me=$'\E[0m' \
+    LESS_TERMCAP_se=$'\E[0m' \
+    LESS_TERMCAP_so=$'\E[38;5;246m' \
+    LESS_TERMCAP_ue=$'\E[0m' \
+    LESS_TERMCAP_us=$'\E[04;38;5;146m' \
+    man "$@"
+}
+
 ### Aliases ####################################################################
 
 alias abuse='querycontacts' # Query DNS abuse contact email addresses by IP
@@ -27,18 +39,6 @@ source '/Users/jonathan/.env_secrets'
 
 # Settings not publicly posted
 source '/Users/jonathan/.bash_profile_secret'
-
-# Colorful manpages
-man() {
-    env LESS_TERMCAP_mb=$'\E[01;31m' \
-    LESS_TERMCAP_md=$'\E[01;38;5;74m' \
-    LESS_TERMCAP_me=$'\E[0m' \
-    LESS_TERMCAP_se=$'\E[0m' \
-    LESS_TERMCAP_so=$'\E[38;5;246m' \
-    LESS_TERMCAP_ue=$'\E[0m' \
-    LESS_TERMCAP_us=$'\E[04;38;5;146m' \
-    man "$@"
-}
 
 # nvm
 export NVM_DIR="$HOME/.nvm"
