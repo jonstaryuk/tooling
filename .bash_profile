@@ -2,7 +2,7 @@
 
 export CLICOLOR=1
 export LSCOLORS=GxFxCxDxBxegedabagaced
-alias tree="tree -C"
+alias trec="tree -C"
 
 ### Aliases ####################################################################
 
