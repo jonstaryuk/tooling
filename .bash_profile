@@ -89,8 +89,8 @@ txtblu="$(tput setaf 4 2>/dev/null || echo '\e[0;34m')"  # Blue
 txtpur="$(tput setaf 5 2>/dev/null || echo '\e[0;35m')"  # Purple
 txtylw="$(tput setaf 3 2>/dev/null || echo '\e[0;33m')"  # Yellow
 txtrst="$(tput sgr 0 2>/dev/null || echo '\e[0m')"  # Text Reset
-export PS1="\[$txtblu\]\u@\h \w\[$txtpur\]\$git_branch\[$txtylw\]\$git_dirty\[$txtblu\] \$ \[$txtrst\]"
+export PS1="\[$txtblu\]\u@\h \W\[$txtpur\]\$git_branch\[$txtylw\]\$git_dirty\[$txtblu\] \$ \[$txtrst\]"
 
 # Default Git enabled root prompt (for use with "sudo -s")
 bakred="$(tput setab 1 2>/dev/null || echo '\e[41m')"  # Red
-export SUDO_PS1="\[$bakred\]\u@\h\[$txtrst\] \w \$ "
+export SUDO_PS1="\[$bakred\]\u@\h\[$txtrst\] \W \$ "
