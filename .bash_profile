@@ -37,12 +37,6 @@ source '/Users/jonathan/.env_secrets'
 # Settings not publicly posted
 source '/Users/jonathan/.bash_profile_secret'
 
-# nvm
-export NVM_DIR="$HOME/.nvm"
-. "$(brew --prefix nvm)/nvm.sh"
-
-# rbenv shims
-eval "$(rbenv init -)"
 
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
