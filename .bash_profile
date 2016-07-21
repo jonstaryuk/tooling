@@ -47,9 +47,14 @@ source '/Users/jonathan/google-cloud-sdk/path.bash.inc'
 # The next line enables shell command completion for gcloud.
 # source '/Users/jonathan/google-cloud-sdk/completion.bash.inc'
 
-### Git information in prompt ##################################################
+### Prompt #####################################################################
 
-# from https://github.com/jimeh/git-aware-prompt
+# Git information from https://github.com/jimeh/git-aware-prompt
+
+txtblu="$(tput setaf 4 2>/dev/null || echo '\e[0;34m')"  # Blue
+txtpur="$(tput setaf 5 2>/dev/null || echo '\e[0;35m')"  # Purple
+txtylw="$(tput setaf 3 2>/dev/null || echo '\e[0;33m')"  # Yellow
+txtrst="$(tput sgr 0 2>/dev/null || echo '\e[0m')"  # Text Reset
 
 find_git_branch() {
   # Based on: http://stackoverflow.com/a/13003854/170413
@@ -76,10 +81,6 @@ find_git_dirty() {
 PROMPT_COMMAND="find_git_branch; find_git_dirty; $PROMPT_COMMAND"
 
 # Default Git enabled prompt with dirty state
-txtblu="$(tput setaf 4 2>/dev/null || echo '\e[0;34m')"  # Blue
-txtpur="$(tput setaf 5 2>/dev/null || echo '\e[0;35m')"  # Purple
-txtylw="$(tput setaf 3 2>/dev/null || echo '\e[0;33m')"  # Yellow
-txtrst="$(tput sgr 0 2>/dev/null || echo '\e[0m')"  # Text Reset
 export PS1="\[$txtblu\]\u@\h \W\[$txtpur\]\$git_branch\[$txtylw\]\$git_dirty\[$txtblu\] \$ \[$txtrst\]"
 
 # Default Git enabled root prompt (for use with "sudo -s")
