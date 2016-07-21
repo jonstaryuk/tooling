@@ -77,7 +77,7 @@ function _prompt_command() {
   # Based on http://stackoverflow.com/a/13003854/170413
   local branch
   PS1+="$txtpur"
-  if branch=$(git rev-parse --abbrev-ref HEAD 2> /dev/null); then
+  if [ -d ".git" ] && branch=$(git rev-parse --abbrev-ref HEAD 2> /dev/null); then
     if [[ "$branch" == "HEAD" ]]; then
       branch="detached"
     fi
