@@ -51,16 +51,16 @@ include '/Users/jonathan/google-cloud-sdk/path.bash.inc'
 
 ### Prompt #####################################################################
 
+# Color shortcuts
+txtred="$(tput setaf 1 2>/dev/null || echo '\e[0;31m')"  # Red
+txtblu="$(tput setaf 4 2>/dev/null || echo '\e[0;34m')"  # Blue
+txtpur="$(tput setaf 5 2>/dev/null || echo '\e[0;35m')"  # Purple
+txtylw="$(tput setaf 3 2>/dev/null || echo '\e[0;33m')"  # Yellow
+txtrst="$(tput sgr 0 2>/dev/null || echo '\e[0m')"  # Text Reset
+
 function _prompt_command() {
   # Get last exit code (must come first)
   local EXIT="$?"
-
-  # Color shortcuts
-  local txtred="$(tput setaf 1 2>/dev/null || echo '\e[0;31m')"  # Red
-  local txtblu="$(tput setaf 4 2>/dev/null || echo '\e[0;34m')"  # Blue
-  local txtpur="$(tput setaf 5 2>/dev/null || echo '\e[0;35m')"  # Purple
-  local txtylw="$(tput setaf 3 2>/dev/null || echo '\e[0;33m')"  # Yellow
-  local txtrst="$(tput sgr 0 2>/dev/null || echo '\e[0m')"  # Text Reset
 
   # Color the prompt character based on last exit code
   if [ $EXIT != 0 ]; then
@@ -101,5 +101,4 @@ export PROMPT_COMMAND=_prompt_command
 
 # Default Git enabled root prompt (for use with "sudo -s")
 bakred="$(tput setab 1 2>/dev/null || echo '\e[41m')"  # Red background
-txtrst="$(tput sgr 0 2>/dev/null || echo '\e[0m')"  # Text Reset
 export SUDO_PS1="\[$bakred\]\u@\h \W\[$txtrst\] \$ "
