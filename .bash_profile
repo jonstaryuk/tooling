@@ -49,40 +49,55 @@ source '/Users/jonathan/google-cloud-sdk/path.bash.inc'
 
 ### Prompt #####################################################################
 
-# Git information from https://github.com/jimeh/git-aware-prompt
+function _prompt_command() {
+  # Get last exit code (must come first)
+  local EXIT="$?"
 
-txtblu="$(tput setaf 4 2>/dev/null || echo '\e[0;34m')"  # Blue
-txtpur="$(tput setaf 5 2>/dev/null || echo '\e[0;35m')"  # Purple
-txtylw="$(tput setaf 3 2>/dev/null || echo '\e[0;33m')"  # Yellow
-txtrst="$(tput sgr 0 2>/dev/null || echo '\e[0m')"  # Text Reset
+  # Color shortcuts
+  local txtred="$(tput setaf 1 2>/dev/null || echo '\e[0;31m')"  # Red
+  local txtblu="$(tput setaf 4 2>/dev/null || echo '\e[0;34m')"  # Blue
+  local txtpur="$(tput setaf 5 2>/dev/null || echo '\e[0;35m')"  # Purple
+  local txtylw="$(tput setaf 3 2>/dev/null || echo '\e[0;33m')"  # Yellow
+  local txtrst="$(tput sgr 0 2>/dev/null || echo '\e[0m')"  # Text Reset
 
-find_git_branch() {
-  # Based on: http://stackoverflow.com/a/13003854/170413
+  # Color the prompt character based on last exit code
+  if [ $EXIT != 0 ]; then
+    local prompt_char="$txtred\$"
+  else
+    local prompt_char="$txtblu\$"
+  fi
+
+  # Add user, host, and current directory name
+  PS1="$txtblu\u@\h \W "
+
+  # Find git branch
+  # Via https://github.com/jimeh/git-aware-prompt
+  # Based on http://stackoverflow.com/a/13003854/170413
   local branch
+  PS1+="$txtpur"
   if branch=$(git rev-parse --abbrev-ref HEAD 2> /dev/null); then
     if [[ "$branch" == "HEAD" ]]; then
-      branch='detached*'
+      branch="detached"
     fi
-    git_branch=" ($branch)"
-  else
-    git_branch=""
+    PS1+="($branch)"
+
+    # Find git dirty state
+    local status=$(git status --porcelain 2> /dev/null)
+    if [[ "$status" != "" ]]; then
+      PS1+="$txtylw • $txtblu"
+    else
+      PS1+=" "
+    fi
   fi
+  PS1+="$txtblu"
+
+  # Append prompt char, space, and reset text color
+  PS1+="$prompt_char $txtrst"
 }
 
-find_git_dirty() {
-  local status=$(git status --porcelain 2> /dev/null)
-  if [[ "$status" != "" ]]; then
-    git_dirty=' *'
-  else
-    git_dirty=''
-  fi
-}
-
-PROMPT_COMMAND="find_git_branch; find_git_dirty; $PROMPT_COMMAND"
-
-# Default Git enabled prompt with dirty state
-export PS1="\[$txtblu\]\u@\h \W\[$txtpur\]\$git_branch\[$txtylw\]\$git_dirty\[$txtblu\] \$ \[$txtrst\]"
+export PROMPT_COMMAND=_prompt_command
 
 # Default Git enabled root prompt (for use with "sudo -s")
-bakred="$(tput setab 1 2>/dev/null || echo '\e[41m')"  # Red
-export SUDO_PS1="\[$bakred\]\u@\h\[$txtrst\] \W \$ "
+bakred="$(tput setab 1 2>/dev/null || echo '\e[41m')"  # Red background
+txtrst="$(tput sgr 0 2>/dev/null || echo '\e[0m')"  # Text Reset
+export SUDO_PS1="\[$bakred\]\u@\h \W\[$txtrst\] \$ "
