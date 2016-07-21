@@ -31,21 +31,23 @@ alias rand='random'
 # Private mode
 alias private='unset HISTFILE && echo -e "\033[1m[\033[0m\033[4m*\033[0m\033[1m] \033[0m\033[4mprivate mode activated.\033[0m"'
 
-# Sensitive environment variables
-source '/Users/jonathan/.env_secrets'
+# Include other files
+include () {
+  [[ -f "$1" ]] && source "$1"
+}
 
 # Settings not publicly posted
-source '/Users/jonathan/.bash_profile_secret'
-
+include '/Users/jonathan/.env_secrets'
+include '/Users/jonathan/.bash_profile_secret'
 
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
 
-# The next line updates PATH for the Google Cloud SDK.
-source '/Users/jonathan/google-cloud-sdk/path.bash.inc'
+# Google Cloud SDK
+include '/Users/jonathan/google-cloud-sdk/path.bash.inc'
 
-# The next line enables shell command completion for gcloud.
-# source '/Users/jonathan/google-cloud-sdk/completion.bash.inc'
+# Shell command completion for gcloud.
+# include '/Users/jonathan/google-cloud-sdk/completion.bash.inc'
 
 ### Prompt #####################################################################
 
