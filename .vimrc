@@ -38,3 +38,6 @@ function! MarkWindowSwap()
     let g:markedWinNum = winnr()
 endfunction
 
+" Enable use of the mouse
+set mouse=a
+
