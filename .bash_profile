@@ -64,19 +64,19 @@ function _prompt_command() {
 
   # Color the prompt character based on last exit code
   if [ $EXIT != 0 ]; then
-    local prompt_char="$txtred\$"
+    local prompt_char="\[$txtred\]\$"
   else
-    local prompt_char="$txtblu\$"
+    local prompt_char="\[$txtblu\]\$"
   fi
 
   # Add user, host, and current directory name
-  PS1="$txtblu\u@\h \W "
+  PS1="\[$txtblu\]\u@\h \W "
 
   # Find git branch
   # Via https://github.com/jimeh/git-aware-prompt
   # Based on http://stackoverflow.com/a/13003854/170413
   local branch
-  PS1+="$txtpur"
+  PS1+="\[$txtpur\]"
   if [ -d ".git" ] && branch=$(git rev-parse --abbrev-ref HEAD 2> /dev/null); then
     if [[ "$branch" == "HEAD" ]]; then
       branch="detached"
@@ -86,15 +86,15 @@ function _prompt_command() {
     # Find git dirty state
     local status=$(git status --porcelain 2> /dev/null)
     if [[ "$status" != "" ]]; then
-      PS1+="$txtylw • $txtblu"
+      PS1+="\[$txtylw\] • \[$txtblu\]"
     else
       PS1+=" "
     fi
   fi
-  PS1+="$txtblu"
+  PS1+="\[$txtblu\]"
 
   # Append prompt char, space, and reset text color
-  PS1+="$prompt_char $txtrst"
+  PS1+="$prompt_char \[$txtrst\]"
 }
 
 export PROMPT_COMMAND=_prompt_command
