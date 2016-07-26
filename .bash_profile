@@ -58,7 +58,7 @@ txtpur="$(tput setaf 5 2>/dev/null || echo '\e[0;35m')"  # Purple
 txtylw="$(tput setaf 3 2>/dev/null || echo '\e[0;33m')"  # Yellow
 txtrst="$(tput sgr 0 2>/dev/null || echo '\e[0m')"  # Text Reset
 
-function _prompt_command() {
+function set_up_prompt() {
   # Get last exit code (must come first)
   local EXIT="$?"
 
@@ -97,7 +97,7 @@ function _prompt_command() {
   PS1+="$prompt_char \[$txtrst\]"
 }
 
-export PROMPT_COMMAND=_prompt_command
+export PROMPT_COMMAND="$PROMPT_COMMAND; set_up_prompt"
 
 # Default Git enabled root prompt (for use with "sudo -s")
 bakred="$(tput setab 1 2>/dev/null || echo '\e[41m')"  # Red background
