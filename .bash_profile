@@ -97,7 +97,7 @@ function set_up_prompt() {
   PS1+="$prompt_char \[$txtrst\]"
 }
 
-export PROMPT_COMMAND="$PROMPT_COMMAND; set_up_prompt"
+export PROMPT_COMMAND="set_up_prompt; $PROMPT_COMMAND"
 
 # Default Git enabled root prompt (for use with "sudo -s")
 bakred="$(tput setab 1 2>/dev/null || echo '\e[41m')"  # Red background
