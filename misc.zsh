@@ -5,3 +5,5 @@ alias rand='random'
 source '/Users/jon/Applications/google-cloud-sdk/path.zsh.inc'
 source '/Users/jon/Applications/google-cloud-sdk/completion.zsh.inc'
 
+export PATH=$PATH:/Users/jon/code/go/bin
+
