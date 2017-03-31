@@ -10,3 +10,21 @@ BASE16_SHELL=$HOME/.config/base16-shell/
 
 export PATH=$PATH:/Users/jon/code/go/bin
 
+function share() {
+    filepath=$1
+
+    key=$(head -c 18 /dev/random | base64 | tr "+/" "-_" | tr -d "=")
+    urn="$SHARE_DOMAIN/$key"
+
+    gsutil cp -n \
+        -z "c,css,csv,go,html,js,json,md,py,sh,txt,yaml" \
+        $filepath gs://$urn
+
+    if [ $? -eq 0 ]
+    then
+        echo -n "http://$urn" | pbcopy
+        echo "▸ $urn"
+    else
+        return 1
+    fi
+}
