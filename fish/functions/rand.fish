@@ -1,4 +1,3 @@
-# Defined in - @ line 0
-function rand --description 'alias rand=openssl rand -base64'
-	openssl rand -base64 $argv;
+function rand
+    head -c $argv[1] /dev/random | base64 | tr '+/' '-_' | tr -d '='
 end
