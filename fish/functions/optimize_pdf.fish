@@ -1,4 +1,4 @@
-function optimizePdf
+function optimize_pdf
     command gs -dNOPAUSE -dBATCH -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 \
         -dPDFSETTINGS=/ebook -dNumRenderingThreads=4 \
         -dBandBufferSpace=500000000 -dBufferSpace=1000000000 \
